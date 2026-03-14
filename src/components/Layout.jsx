@@ -26,8 +26,8 @@ const Layout = () => {
                         N
                     </div>
                     {!collapsed && (
-                        <span className="ml-4 text-2xl font-black tracking-tighter animate-in fade-in slide-in-from-left-4 duration-500">
-                            NEURA
+                        <span className="ml-4 text-xl font-black tracking-tighter animate-in fade-in slide-in-from-left-4 duration-500">
+                            PRIVACY-FORGE AI
                         </span>
                     )}
                 </div>
@@ -97,9 +97,9 @@ const Layout = () => {
                     <div className="flex gap-6">
                         <span className="flex items-center gap-2">
                             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-lg shadow-emerald-500/50"></span>
-                            Neural System Active
+                            STAGE 5: SECURE SYNC & PERSISTENCE
                         </span>
-                        <span className="hidden sm:inline">Build 1.0.4 - Premium Alpha</span>
+                        <span className="hidden sm:inline">Secure On-Device Workspace</span>
                     </div>
                     <div className="hidden md:flex gap-4">
                         <span>CPU Optimization Enabled</span>

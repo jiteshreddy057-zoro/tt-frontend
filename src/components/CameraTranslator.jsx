@@ -144,10 +144,13 @@ const CameraTranslator = () => {
         <div className="max-w-5xl mx-auto px-4 py-8 space-y-8 animate-in fade-in duration-700 pb-24">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
+                    <div className="inline-block px-3 py-1 bg-blue-600/10 text-blue-600 rounded-full text-[10px] font-black uppercase tracking-widest mb-2 border border-blue-600/10">
+                        STAGE 1: MULTIMODAL INPUT
+                    </div>
                     <h1 className="text-4xl font-black bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent">
-                        Camera Translator
+                        Camera Translator OCR
                     </h1>
-                    <p className="text-slate-400 text-sm mt-1">Point camera → Extract text → Translate instantly</p>
+                    <p className="text-slate-400 text-sm mt-1">Point camera → Extract text → Translate securely on-device</p>
                 </div>
                 <div className="flex items-center gap-3 p-2 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
                     <span className="text-xs font-bold text-slate-400 uppercase ml-2">Translate to:</span>
