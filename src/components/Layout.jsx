@@ -15,6 +15,7 @@ const Layout = () => {
         { path: '/ocr', label: 'OCR', icon: '📄' },
         { path: '/models', label: 'Models', icon: '💾' },
         { path: '/interesting', label: 'Interesting', icon: '✨' },
+        { path: '/analyzer', label: 'Analyzer', icon: '🔬' },
         { path: '/memory', label: 'Memory', icon: '🧠' },
     ];
     return (

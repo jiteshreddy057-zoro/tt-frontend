@@ -7,6 +7,7 @@ import OCR from './components/OCR';
 import Models from './components/ModelManager';
 import CameraTranslator from './components/CameraTranslator';
 import Interesting from './components/Interesting';
+import SmartAnalyzer from './components/SmartAnalyzer';
 import Home from './components/Home';
 import Layout from './components/Layout';
 import MemoryGraph from './components/MemoryGraph';
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="camera" element={<CameraTranslator />} />
           <Route path="models" element={<Models />} />
           <Route path="interesting" element={<Interesting />} />
+          <Route path="analyzer" element={<SmartAnalyzer />} />
           <Route path="memory" element={<MemoryGraph />} />
         </Route>
       </Routes>
