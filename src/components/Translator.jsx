@@ -71,7 +71,7 @@ const Translator = () => {
         <div className="p-6 max-w-4xl mx-auto space-y-8 animate-in fade-in duration-700">
             <div className="text-center space-y-2">
                 <h1 className="text-4xl font-black tracking-tight bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent">
-                    Neural Translator
+                    STAGE 2 & 3: EDGE ISOLATION & TRANSLATION
                 </h1>
                 <p className="text-slate-500 dark:text-slate-400">High-performance offline translation powered by AI</p>
             </div>
@@ -139,7 +139,7 @@ const Translator = () => {
                     <div className="relative h-64 p-6 bg-slate-100 dark:bg-slate-900/50 rounded-3xl border border-dashed border-slate-300 dark:border-slate-700 flex flex-col overflow-auto">
                         {isLoading && progress && (
                             <div className="absolute inset-0 flex flex-col items-center justify-center p-8 bg-slate-50/80 dark:bg-slate-900/80 backdrop-blur-sm z-10 rounded-3xl animate-in fade-in zoom-in">
-                                <p className="text-sm font-bold text-blue-500 mb-4 animate-bounce">DIALING NEURAL NETWORK...</p>
+                                <p className="text-sm font-bold text-blue-500 mb-4 animate-bounce">PROCESSING ON DEVICE...</p>
                                 <div className="w-48 bg-slate-200 dark:bg-slate-800 rounded-full h-2 mb-2">
                                     <div className="bg-blue-600 h-2 rounded-full transition-all duration-300 shadow-lg shadow-blue-500/50" style={{ width: `${progress.progress}%` }}></div>
                                 </div>

@@ -18,8 +18,16 @@ const Layout = () => {
         { path: '/memory', label: 'Memory', icon: '🧠' },
     ];
     return (
-        <div className="flex h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-500 font-sans">
-            <aside className={`relative flex flex-col h-full bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 transition-all duration-500 ease-in-out shadow-2xl z-40
+        <div className="flex h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-500 font-sans relative overflow-hidden">
+            {/* Animated Dynamic Background */}
+            <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+                <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-blue-500/20 dark:bg-blue-600/10 blur-[120px] rounded-full animate-blob mix-blend-multiply dark:mix-blend-screen"></div>
+                <div className="absolute top-[20%] right-[-10%] w-[40%] h-[40%] bg-purple-500/20 dark:bg-purple-600/10 blur-[120px] rounded-full animate-blob animation-delay-2000 mix-blend-multiply dark:mix-blend-screen"></div>
+                <div className="absolute bottom-[-20%] left-[20%] w-[60%] h-[60%] bg-indigo-500/20 dark:bg-indigo-600/10 blur-[120px] rounded-full animate-blob animation-delay-4000 mix-blend-multiply dark:mix-blend-screen"></div>
+                <div className="absolute inset-0 bg-slate-50/50 dark:bg-slate-950/50 backdrop-blur-[2px]"></div>
+            </div>
+
+            <aside className={`relative flex flex-col h-[calc(100vh-2rem)] my-4 ml-4 glass border border-white/50 dark:border-slate-700/50 rounded-3xl transition-all duration-500 ease-in-out z-40
                 ${collapsed ? 'w-20' : 'w-72'}`}>
                 <div className="h-20 flex items-center px-6 border-b border-slate-100 dark:border-slate-800/50">
                     <div className="w-10 h-10 bg-gradient-to-tr from-blue-600 to-indigo-500 rounded-xl flex items-center justify-center text-white text-2xl font-black shadow-lg shadow-blue-500/20 shrink-0">
@@ -37,10 +45,10 @@ const Layout = () => {
                             key={item.path}
                             to={item.path}
                             className={({ isActive }) => `
-                                flex items-center gap-4 px-4 py-3.5 rounded-2xl font-bold transition-all group relative
+                                flex items-center gap-4 px-4 py-3.5 rounded-2xl font-bold transition-all duration-300 group relative overflow-hidden
                                 ${isActive 
-                                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' 
-                                    : 'text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100'}
+                                    ? 'bg-blue-600/90 text-white shadow-lg shadow-blue-500/40 backdrop-blur-md border border-blue-400/30' 
+                                    : 'text-slate-600 dark:text-slate-300 hover:bg-white/50 dark:hover:bg-slate-800/50 hover:text-blue-600 dark:hover:text-blue-400 border border-transparent'}
                             `}
                         >
                             <span className="text-xl shrink-0 group-hover:scale-110 transition-transform duration-300">
@@ -80,23 +88,23 @@ const Layout = () => {
                 </div>
                 <button 
                     onClick={() => setCollapsed(!collapsed)}
-                    className="absolute -right-4 top-24 w-8 h-8 bg-white dark:bg-slate-800 rounded-full border border-slate-200 dark:border-slate-700 flex items-center justify-center shadow-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors z-50"
+                    className="absolute -right-4 top-24 w-8 h-8 glass hover:bg-white/80 dark:hover:bg-slate-800/80 rounded-full flex items-center justify-center shadow-lg transition-all z-50 group border border-white/50 dark:border-slate-600/50"
                 >
-                    <span className={`text-[10px] transition-transform duration-500 ${collapsed ? 'rotate-180' : ''}`}>
+                    <span className={`text-[10px] text-blue-600 dark:text-blue-400 group-hover:scale-125 transition-all duration-500 ${collapsed ? 'rotate-180' : ''}`}>
                         ◀
                     </span>
                 </button>
             </aside>
-            <main className="flex-1 flex flex-col overflow-hidden">
+            <main className="flex-1 flex flex-col overflow-hidden relative z-10">
                 <div className="flex-1 overflow-y-auto custom-scrollbar">
                     <div className="p-2 sm:p-4 lg:p-8 animate-in fade-in duration-500">
                         <Outlet />
                     </div>
                 </div>
-                <footer className="h-10 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 px-6 flex items-center justify-between text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest overflow-hidden">
+                <footer className="h-10 mx-4 mb-4 glass rounded-2xl px-6 flex items-center justify-between text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest overflow-hidden z-20">
                     <div className="flex gap-6">
-                        <span className="flex items-center gap-2">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-lg shadow-emerald-500/50"></span>
+                        <span className="flex items-center gap-2 group">
+                            <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.8)] animate-pulse"></span>
                             STAGE 5: SECURE SYNC & PERSISTENCE
                         </span>
                         <span className="hidden sm:inline">Secure On-Device Workspace</span>

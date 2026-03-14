@@ -54,13 +54,13 @@ const MemoryGraph = () => {
         }
     };
 
-    if (loading) return <div className="flex h-[60vh] items-center justify-center animate-pulse text-blue-500 font-black">SCANNING NEURAL MEMORY...</div>;
+    if (loading) return <div className="flex h-[60vh] items-center justify-center animate-pulse text-blue-500 font-black">SCANNING HISTORY LOG...</div>;
 
     return (
         <div className="space-y-8 animate-in fade-in duration-1000">
             <div className="text-center lg:text-left space-y-2">
                 <h1 className="text-4xl font-black tracking-tight bg-gradient-to-br from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                    Neural Memory Graph
+                    History Log Graph
                 </h1>
                 <p className="text-slate-500 font-medium italic">Witness the semantic associations extracted from your history.</p>
             </div>
@@ -132,7 +132,7 @@ const MemoryGraph = () => {
 
                                 <div className="p-4 bg-blue-500/5 rounded-2xl border border-blue-500/10">
                                     <p className="text-[10px] text-blue-500 font-medium leading-relaxed italic">
-                                        This entity was semantically connected across multiple sessions, showing persistent neural resonance in your memory graph.
+                                        This entity was semantically connected across multiple sessions, showing persistent records in your history log.
                                     </p>
                                 </div>
                             </div>
