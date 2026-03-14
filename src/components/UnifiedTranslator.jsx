@@ -162,6 +162,7 @@ const Translator = () => {
                                 {isRecording ? '⏹️' : '🎙️'}
                             </button>
                         )}
+                    </div>
                     <button
                         onClick={handleTranslate}
                         disabled={isLoading || !inputText.trim()}
