@@ -14,20 +14,20 @@ const Layout = () => {
         { path: '/translator', label: 'Translator', icon: '🌐' },
         { path: '/ocr', label: 'OCR', icon: '📄' },
         { path: '/models', label: 'Models', icon: '💾' },
-        { path: '/learn', label: 'Learn', icon: '🎓' },
+        { path: '/interesting', label: 'Interesting', icon: '✨' },
         { path: '/memory', label: 'Memory', icon: '🧠' },
     ];
     return (
-        <div className="flex h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-500 font-sans relative overflow-hidden">
-            {/* Animated Dynamic Background */}
+        <div className="flex h-screen bg-slate-950 text-slate-100 transition-colors duration-500 font-sans relative overflow-hidden">
+            {/* Radiant Deep Space Background */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-blue-500/20 dark:bg-blue-600/10 blur-[120px] rounded-full animate-blob mix-blend-multiply dark:mix-blend-screen"></div>
-                <div className="absolute top-[20%] right-[-10%] w-[40%] h-[40%] bg-purple-500/20 dark:bg-purple-600/10 blur-[120px] rounded-full animate-blob animation-delay-2000 mix-blend-multiply dark:mix-blend-screen"></div>
-                <div className="absolute bottom-[-20%] left-[20%] w-[60%] h-[60%] bg-indigo-500/20 dark:bg-indigo-600/10 blur-[120px] rounded-full animate-blob animation-delay-4000 mix-blend-multiply dark:mix-blend-screen"></div>
-                <div className="absolute inset-0 bg-slate-50/50 dark:bg-slate-950/50 backdrop-blur-[2px]"></div>
+                <div className="absolute top-[0%] left-[-10%] w-[60%] h-[60%] bg-cyan-600/20 blur-[150px] rounded-full animate-blob mix-blend-screen"></div>
+                <div className="absolute top-[10%] right-[-10%] w-[50%] h-[50%] bg-fuchsia-600/20 blur-[150px] rounded-full animate-blob animation-delay-2000 mix-blend-screen"></div>
+                <div className="absolute bottom-[-10%] left-[20%] w-[70%] h-[70%] bg-indigo-600/20 blur-[150px] rounded-full animate-blob animation-delay-4000 mix-blend-screen"></div>
+                <div className="absolute inset-0 bg-[#020617]/40 backdrop-blur-[2px]"></div> {/* Deep Slate-950 Tint */}
             </div>
 
-            <aside className={`relative flex flex-col h-[calc(100vh-2rem)] my-4 ml-4 glass border border-white/50 dark:border-slate-700/50 rounded-3xl transition-all duration-500 ease-in-out z-40
+            <aside className={`relative flex flex-col h-[calc(100vh-2rem)] my-4 ml-4 bg-slate-900/60 backdrop-blur-3xl border border-cyan-500/20 rounded-3xl transition-all duration-500 ease-in-out z-40 shadow-[0_0_50px_-12px_rgba(34,211,238,0.25)]
                 ${collapsed ? 'w-20' : 'w-72'}`}>
                 <div className="h-20 flex items-center px-6 border-b border-slate-100 dark:border-slate-800/50">
                     <div className="w-10 h-10 bg-gradient-to-tr from-blue-600 to-indigo-500 rounded-xl flex items-center justify-center text-white text-2xl font-black shadow-lg shadow-blue-500/20 shrink-0">
@@ -41,16 +41,16 @@ const Layout = () => {
                 </div>
                 <nav className="flex-1 py-8 px-4 space-y-2 overflow-y-auto custom-scrollbar">
                     {navItems.map((item) => (
-                        <NavLink
-                            key={item.path}
-                            to={item.path}
-                            className={({ isActive }) => `
-                                flex items-center gap-4 px-4 py-3.5 rounded-2xl font-bold transition-all duration-300 group relative overflow-hidden
-                                ${isActive 
-                                    ? 'bg-blue-600/90 text-white shadow-lg shadow-blue-500/40 backdrop-blur-md border border-blue-400/30' 
-                                    : 'text-slate-600 dark:text-slate-300 hover:bg-white/50 dark:hover:bg-slate-800/50 hover:text-blue-600 dark:hover:text-blue-400 border border-transparent'}
-                            `}
-                        >
+                            <NavLink
+                                key={item.path}
+                                to={item.path}
+                                className={({ isActive }) => `
+                                    flex items-center gap-4 px-4 py-3.5 rounded-2xl font-bold transition-all duration-500 group relative overflow-hidden
+                                    ${isActive 
+                                        ? 'bg-gradient-to-r from-cyan-600/80 to-blue-600/80 text-white shadow-[0_0_20px_rgba(34,211,238,0.5)] border border-cyan-400/50' 
+                                        : 'text-slate-400 hover:bg-white/5 hover:text-cyan-400 border border-transparent'}
+                                `}
+                            >
                             <span className="text-xl shrink-0 group-hover:scale-110 transition-transform duration-300">
                                 {item.icon}
                             </span>

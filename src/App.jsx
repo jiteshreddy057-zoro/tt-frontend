@@ -6,7 +6,7 @@ import Translator from './components/UnifiedTranslator';
 import OCR from './components/OCR';
 import Models from './components/ModelManager';
 import CameraTranslator from './components/CameraTranslator';
-import LanguageLearner from './components/LanguageLearner';
+import Interesting from './components/Interesting';
 import Home from './components/Home';
 import Layout from './components/Layout';
 import MemoryGraph from './components/MemoryGraph';
@@ -29,7 +29,7 @@ const App = () => {
           <Route path="ocr" element={<OCR />} />
           <Route path="camera" element={<CameraTranslator />} />
           <Route path="models" element={<Models />} />
-          <Route path="learn" element={<LanguageLearner />} />
+          <Route path="interesting" element={<Interesting />} />
           <Route path="memory" element={<MemoryGraph />} />
         </Route>
       </Routes>
