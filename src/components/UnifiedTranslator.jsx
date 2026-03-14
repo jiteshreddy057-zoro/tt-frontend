@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { languages } from '../constants/languages';
 import { saveHistory } from '../services/api';
+import { refineTranslation, summarizeText } from '../services/geminiService';
 const Translator = () => {
     const [mode, setMode] = useState('text-to-text');
     const [inputText, setInputText] = useState('');
@@ -11,6 +12,9 @@ const Translator = () => {
     const [progress, setProgress] = useState(null);
     const [isRecording, setIsRecording] = useState(false);
     const [error, setError] = useState(null);
+    const [aiResponse, setAiResponse] = useState('');
+    const [aiLoading, setAiLoading] = useState(false);
+    const [aiError, setAiError] = useState(null);
     const worker = useRef(null);
     const recognition = useRef(null);
     const synthesis = useRef(window.speechSynthesis);
@@ -92,6 +96,41 @@ const Translator = () => {
             recognition.current.lang = srcLang.split('_')[0];
             recognition.current?.start();
             setIsRecording(true);
+        }
+    };
+    const handleRefine = async () => {
+        if (!outputText || !inputText) return;
+        setAiLoading(true);
+        setAiError(null);
+        setAiResponse('');
+        try {
+            const srcName = languages.find(l => l.code === srcLang)?.name || srcLang;
+            const tgtName = languages.find(l => l.code === tgtLang)?.name || tgtLang;
+            const result = await refineTranslation({
+                sourceText: inputText,
+                translatedText: outputText,
+                sourceLang: srcName,
+                targetLang: tgtName
+            });
+            setAiResponse(result);
+        } catch (err) {
+            setAiError(err.message || 'AI refinement failed.');
+        } finally {
+            setAiLoading(false);
+        }
+    };
+    const handleSummarize = async () => {
+        if (!inputText.trim()) return;
+        setAiLoading(true);
+        setAiError(null);
+        setAiResponse('');
+        try {
+            const result = await summarizeText(inputText);
+            setAiResponse(result);
+        } catch (err) {
+            setAiError(err.message || 'AI summarization failed.');
+        } finally {
+            setAiLoading(false);
         }
     };
     const modes = [
@@ -230,6 +269,83 @@ const Translator = () => {
                     </div>
                 </div>
             </div>
+
+            {/* AI Feature Buttons */}
+            <div className="flex flex-wrap gap-4 relative z-10 animate-in fade-in duration-500">
+                <button
+                    onClick={handleSummarize}
+                    disabled={aiLoading || !inputText.trim()}
+                    className="flex-1 min-w-[200px] py-4 bg-gradient-to-r from-fuchsia-600/80 to-purple-600/80 text-white rounded-2xl font-black shadow-[0_0_30px_rgba(217,70,239,0.3)] hover:shadow-[0_0_50px_rgba(217,70,239,0.6)] hover:-translate-y-0.5 active:translate-y-0.5 transition-all duration-300 disabled:opacity-40 disabled:transform-none flex items-center justify-center gap-3 text-sm border border-fuchsia-400/50"
+                >
+                    {aiLoading ? (
+                        <div className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full animate-spin" />
+                    ) : (
+                        <span className="text-lg">📋</span>
+                    )}
+                    AI Summarize
+                </button>
+                <button
+                    onClick={handleRefine}
+                    disabled={aiLoading || !outputText}
+                    className="flex-1 min-w-[200px] py-4 bg-gradient-to-r from-cyan-600/80 to-emerald-600/80 text-white rounded-2xl font-black shadow-[0_0_30px_rgba(34,211,238,0.3)] hover:shadow-[0_0_50px_rgba(34,211,238,0.6)] hover:-translate-y-0.5 active:translate-y-0.5 transition-all duration-300 disabled:opacity-40 disabled:transform-none flex items-center justify-center gap-3 text-sm border border-cyan-400/50"
+                >
+                    {aiLoading ? (
+                        <div className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full animate-spin" />
+                    ) : (
+                        <span className="text-lg">🤖</span>
+                    )}
+                    Refine with AI
+                </button>
+            </div>
+
+            {/* AI Response Panel */}
+            {(aiResponse || aiLoading || aiError) && (
+                <div className="relative z-10 animate-in slide-in-from-bottom-8 duration-700">
+                    <div className="p-8 bg-slate-900/90 backdrop-blur-2xl border border-fuchsia-500/40 rounded-[32px] shadow-[0_0_50px_rgba(217,70,239,0.15)] relative overflow-hidden">
+                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 via-fuchsia-500 to-purple-500"></div>
+                        <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-fuchsia-600/10 to-cyan-600/10 rounded-full blur-3xl pointer-events-none"></div>
+                        
+                        <div className="flex items-center gap-4 mb-6">
+                            <div className="w-12 h-12 bg-gradient-to-br from-fuchsia-500 to-cyan-500 rounded-2xl flex items-center justify-center text-xl shadow-[0_0_20px_rgba(217,70,239,0.4)]">
+                                {aiLoading ? (
+                                    <div className="w-6 h-6 border-3 border-white/30 border-t-white rounded-full animate-spin" />
+                                ) : '🧠'}
+                            </div>
+                            <div>
+                                <h3 className="font-black text-sm uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 to-cyan-400">Gemini AI Analysis</h3>
+                                <p className="text-[10px] text-slate-500 font-medium">Powered by Google Gemini 2.0 Flash</p>
+                            </div>
+                        </div>
+
+                        {aiLoading && (
+                            <div className="flex items-center gap-4 py-8">
+                                <div className="flex gap-1.5">
+                                    <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                                    <div className="w-2.5 h-2.5 rounded-full bg-fuchsia-400 animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                                    <div className="w-2.5 h-2.5 rounded-full bg-purple-400 animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                                </div>
+                                <p className="text-sm text-fuchsia-400 font-bold tracking-wider animate-pulse">AI is thinking...</p>
+                            </div>
+                        )}
+
+                        {aiError && (
+                            <div className="p-4 bg-red-900/30 border border-red-500/50 rounded-2xl text-red-400 text-sm font-bold">
+                                ⚠️ {aiError}
+                            </div>
+                        )}
+
+                        {aiResponse && (
+                            <div className="prose prose-invert prose-sm max-w-none text-slate-300 leading-relaxed
+                                prose-strong:text-cyan-400 prose-h1:text-fuchsia-400 prose-h2:text-fuchsia-400 prose-h3:text-fuchsia-400
+                                prose-ul:text-slate-300 prose-ol:text-slate-300 prose-li:marker:text-fuchsia-400
+                                prose-code:text-cyan-300 prose-code:bg-slate-800/50 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md
+                                whitespace-pre-wrap">
+                                {aiResponse}
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

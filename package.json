@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@google/genai": "^1.45.0",
     "@simplewebauthn/browser": "^13.3.0",
     "@vercel/analytics": "^2.0.1",
     "axios": "^1.13.5",

@@ -27,16 +27,16 @@ const Home = () => {
                     to="/camera"
                 />
                 <FeatureCard
-                    title="STAGE 2 & 3: EDGE ISOLATION"
-                    desc="Secure on-device translation pipeline."
+                    title="AI-Powered Translator"
+                    desc="Translate text with AI refinement and grammar analysis by Gemini."
                     icon="🌐"
                     to="/translator"
                 />
                 <FeatureCard
-                    title="STAGE 2: EDGE ISOLATION (OCR)"
-                    desc="Extract structured text locally with Tesseract.js."
-                    icon="📄"
-                    to="/ocr"
+                    title="AI Summarize & Refine"
+                    desc="Summarize documents and refine translations with Google Gemini AI."
+                    icon="🧠"
+                    to="/translator"
                 />
                 <FeatureCard
                     title="Language Trivia"
